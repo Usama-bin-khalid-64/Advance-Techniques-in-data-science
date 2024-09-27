@@ -1,0 +1,78 @@
+# List to store products as dictionaries
+products = []
+
+def show_all_products():
+    """Display all products in the inventory."""
+    if len(products) == 0:
+        print("No products available.")
+    else:
+        for index, product in enumerate(products):
+            print(f"{index + 1}. PID: {product['pid']}, Name: {product['name']}, Description: {product['description']}, Price: ${product['price']}, Image: {product['image']}, Rating: {product['rating']}")
+
+def add_new_product():
+    """Add a new product to the inventory."""
+    pid = input("Enter product ID: ")
+    name = input("Enter product name: ")
+    description = input("Enter product description: ")
+    price = float(input("Enter product price: "))
+    image = input("Enter product image filename: ")
+    rating = float(input("Enter product rating (0-5): "))
+    
+    product = {
+        'pid': pid,
+        'name': name,
+        'description': description,
+        'price': price,
+        'image': image,
+        'rating': rating
+    }
+    products.append(product)
+    print(f"Product '{name}' added successfully!")
+
+def delete_product():
+    """Delete a product from the inventory based on PID."""
+    pid = input("Enter the product ID to delete: ")
+    for product in products:
+        if product['pid'] == pid:
+            products.remove(product)
+            print(f"Product '{product['name']}' deleted successfully!")
+            return
+    print("Product with given PID not found.")
+
+def update_product_rating():
+    """Update the rating of an existing product based on PID."""
+    pid = input("Enter the product ID to update rating: ")
+    for product in products:
+        if product['pid'] == pid:
+            new_rating = float(input("Enter new rating (0-5): "))
+            product['rating'] = new_rating
+            print(f"Product '{product['name']}' rating updated to {new_rating}.")
+            return
+    print("Product with given PID not found.")
+
+def main():
+    """Main function to run the application."""
+    while True:
+        print("\n1. Show All Products")
+        print("2. Add New Product")
+        print("3. Delete a Product")
+        print("4. Update Product Rating")
+        print("5. Exit")
+        option = input("Enter Option to Continue: ")
+
+        if option == '1':
+            show_all_products()
+        elif option == '2':
+            add_new_product()
+        elif option == '3':
+            delete_product()
+        elif option == '4':
+            update_product_rating()
+        elif option == '5':
+            print("Exiting the application. Goodbye!")
+            break
+        else:
+            print("Invalid option, please choose a valid one.")
+
+# Uncomment the following line to run the application
+# main()
